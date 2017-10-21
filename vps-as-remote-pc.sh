@@ -3,7 +3,7 @@
 sudo add-apt-repository ppa:nilarimogard/webupd8 -y
 # Mandatory stuff
 sudo apt update
-sudo apt upgrade
+sudo apt upgrade -y
 # Installs LXDE, TightVNC Server, Chromium and youtube-dl
 sudo apt install lubuntu-desktop tightvncserver chromium-browser youtube-dl -y
 # Starts VNC server to set initial configuration
