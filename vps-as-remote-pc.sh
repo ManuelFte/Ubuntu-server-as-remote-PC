@@ -1,11 +1,13 @@
 #!/bin/bash
-# Adds PPA for youtube-dl
+# Adds PPAs for youtube-dl and Google Chrome
 sudo add-apt-repository ppa:nilarimogard/webupd8 -y
+wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
+sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
 # Mandatory stuff
 sudo apt update
 sudo apt upgrade -y
 # Installs LXDE, TightVNC Server, Chromium and youtube-dl
-sudo apt install lubuntu-desktop tightvncserver chromium-browser youtube-dl -y
+sudo apt install lubuntu-desktop tightvncserver chromium-browser youtube-dl google-chrome-stable -y
 # Starts VNC server to set initial configuration
 vncserver
 # Kills it in order to override settings
