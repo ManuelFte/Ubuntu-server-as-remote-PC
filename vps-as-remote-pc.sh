@@ -6,8 +6,8 @@ sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable
 # Mandatory stuff
 sudo apt update
 sudo apt upgrade -y
-# Installs LXDE, TightVNC Server, Chromium and youtube-dl
-sudo apt install lubuntu-desktop tightvncserver chromium-browser youtube-dl google-chrome-stable -y
+# Installs LXDE, TightVNC Server, youtube-dl, Chrome and Nginx
+sudo apt install lubuntu-desktop tightvncserver youtube-dl google-chrome-stable nginx -y
 # Starts VNC server to set initial configuration
 vncserver
 # Kills it in order to override settings
