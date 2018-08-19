@@ -3,14 +3,16 @@
 ## Description
 
 
-Turns a VPS into a basic remote PC. Essentially an automated version of [this tutorial](https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-vnc-on-ubuntu-16-04), with several changes:
+Turns a VPS into a basic remote PC appropriate for downloading and streaming media at high speed. Essentially an automated version of [this tutorial](https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-vnc-on-ubuntu-16-04), with multilple changes:
 
 * LXDE instead of Xfce
-* Chromium ~~(because who uses Firefox nowadays)~~
+* Google Chrome ~~(because who uses Firefox nowadays)~~
 * OpenDNS
-* youtube-dl (:smirk:)
+* youtube-dl
+* jDownloader (downloads script, doesn't install)
+* Nginx
 
-**It is meant for my personal tests and not for general usage**, but it can work for other cases as is or with simple modifications. Tested on a droplet with Ubuntu 16.04 on DigitalOcean, should run as well on most VPS with that system.
+Tested on Ubuntu 16.04 on DigitalOcean and Google Cloud.
 
 ## Usage
 
