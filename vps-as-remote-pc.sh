@@ -32,4 +32,5 @@ sudo mv /etc/resolv.conf /etc/resolv.conf.bak
 sudo mv resolv.conf /etc
 # sudo touch /etc/resolv.conf
 # sudo echo -e "nameserver 208.67.222.222\nnameserver 208.67.220.220" >> /etc/resolv.conf
-
+#Downloads jDownloader
+wget https://mfte.co/u/jdownloader.sh
