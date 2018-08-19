@@ -34,3 +34,8 @@ sudo mv resolv.conf /etc
 # sudo echo -e "nameserver 208.67.222.222\nnameserver 208.67.220.220" >> /etc/resolv.conf
 #Downloads jDownloader
 wget https://mfte.co/u/jdownloader.sh
+#Downloads the page for streams
+wget https://bitbucket.org/ManuelFte/VPS-as-remote-PC/raw/master/stream/index.html
+#Moves it to the Nginx directory
+sudo mkdir /var/www/html/stream
+sudo mv index.html /var/www/html/stream
