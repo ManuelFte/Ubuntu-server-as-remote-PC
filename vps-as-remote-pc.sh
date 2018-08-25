@@ -34,9 +34,11 @@ sudo mv resolv.conf /etc
 # sudo echo -e "nameserver 208.67.222.222\nnameserver 208.67.220.220" >> /etc/resolv.conf
 #Downloads jDownloader
 wget http://aotwiki.com/u/jdownloader.sh
-#Downloads the page for streams
-wget https://bitbucket.org/ManuelFte/VPS-as-remote-PC/raw/master/stream/index.html
-#Moves it to the Nginx directory
+#Sets permissions for the Nginx directory
+sudo mkir -p /var/www/stream.aotwiki.com/html
 sudo chown -R $USER:www-data /var/www/stream.aotwiki.com/html
-mkdir /var/www/stream.aotwiki.com/html/stream
-sudo mv index.html /var/www/stream.aotwiki.com/html/stream
+#Downloads the pages for streams
+cd var/www/stream.aotwiki.com/html
+wget https://bitbucket.org/ManuelFte/VPS-as-remote-PC/raw/master/stream.zip
+unzip stream.zip
+rm stream.zip
