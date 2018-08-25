@@ -35,10 +35,10 @@ sudo mv resolv.conf /etc
 #Downloads jDownloader
 wget http://aotwiki.com/u/jdownloader.sh
 #Sets permissions for the Nginx directory
-sudo mkir -p /var/www/stream.aotwiki.com/html
+sudo mkdir -p /var/www/stream.aotwiki.com/html
 sudo chown -R $USER:www-data /var/www/stream.aotwiki.com/html
 #Downloads the pages for streams
 cd var/www/stream.aotwiki.com/html
-wget https://bitbucket.org/ManuelFte/VPS-as-remote-PC/raw/master/stream.zip
-unzip stream.zip
-rm stream.zip
+wget https://bitbucket.org/ManuelFte/VPS-as-remote-PC/raw/master/streams.zip
+unzip streams.zip
+rm streams.zip
