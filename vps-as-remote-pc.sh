@@ -38,7 +38,13 @@ wget http://aotwiki.com/u/jdownloader.sh
 sudo mkdir -p /var/www/stream.aotwiki.com/html
 sudo chown -R $USER:www-data /var/www/stream.aotwiki.com/html
 #Downloads the pages for streams
-cd var/www/stream.aotwiki.com/html
+cd /var/www/stream.aotwiki.com/html
 wget https://bitbucket.org/ManuelFte/VPS-as-remote-PC/raw/master/streams.zip
 unzip streams.zip
 rm streams.zip
+cd ~
+#Configures server
+wget https://bitbucket.org/ManuelFte/VPS-as-remote-PC/raw/master/stream.aotwiki.com
+sudo mv stream.aotwiki.com /etc/nginx/sites-available
+sudo ln -s /etc/nginx/sites-available/stream.aotwiki.com /etc/nginx/sites-enabled
+sudo systemctl reload nginx
