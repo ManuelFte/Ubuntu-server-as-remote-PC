@@ -33,7 +33,7 @@ sudo mv resolv.conf /etc
 # sudo touch /etc/resolv.conf
 # sudo echo -e "nameserver 208.67.222.222\nnameserver 208.67.220.220" >> /etc/resolv.conf
 #Downloads jDownloader
-wget http://aotwiki.com/u/jdownloader.sh
+wget https://aotwiki.com/u/jdownloader.sh
 #Sets permissions for the Nginx directory
 sudo mkdir -p /var/www/stream.aotwiki.com/html
 sudo chown -R $USER:www-data /var/www/stream.aotwiki.com/html
