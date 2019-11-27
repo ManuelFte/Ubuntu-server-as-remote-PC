@@ -3,7 +3,7 @@
 ## Description
 
 
-Turns a VPS into a basic remote PC appropriate for downloading and streaming media at high speed. Essentially an automated version of [this tutorial](https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-vnc-on-ubuntu-16-04), with multilple changes:
+Turns a VPS into a basic remote PC appropriate for downloading and streaming media at high speed. Essentially an automated version of [this tutorial](https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-vnc-on-ubuntu-16-04), with multiple changes:
 
 * LXDE instead of Xfce
 * Google Chrome ~~(because who uses Firefox nowadays)~~

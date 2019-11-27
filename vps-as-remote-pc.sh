@@ -33,18 +33,18 @@ sudo mv resolv.conf /etc
 # sudo touch /etc/resolv.conf
 # sudo echo -e "nameserver 208.67.222.222\nnameserver 208.67.220.220" >> /etc/resolv.conf
 #Downloads jDownloader
-wget https://aotwiki.com/u/jdownloader.sh
+#wget https://aotwiki.com/u/jdownloader.sh
 #Sets permissions for the Nginx directory
-sudo mkdir -p /var/www/stream.aotwiki.com/html
-sudo chown -R $USER:www-data /var/www/stream.aotwiki.com/html
-#Downloads the pages for streams
-cd /var/www/stream.aotwiki.com/html
-wget https://bitbucket.org/ManuelFte/VPS-as-remote-PC/raw/master/streams.zip
-unzip streams.zip
-rm streams.zip
-cd ~
-#Configures server
-wget https://bitbucket.org/ManuelFte/VPS-as-remote-PC/raw/master/stream.aotwiki.com
-sudo mv stream.aotwiki.com /etc/nginx/sites-available
-sudo ln -s /etc/nginx/sites-available/stream.aotwiki.com /etc/nginx/sites-enabled
-sudo systemctl reload nginx
+#sudo mkdir -p /var/www/stream.aotwiki.com/html
+# $sudo chown -R $USER:www-data /var/www/stream.aotwiki.com/html
+# #Downloads the pages for streams
+# #cd /var/www/stream.aotwiki.com/html
+# wget https://bitbucket.org/ManuelFte/VPS-as-remote-PC/raw/master/streams.zip
+# unzip streams.zip
+# rm streams.zip
+# cd ~
+# #Configures server
+# wget https://bitbucket.org/ManuelFte/VPS-as-remote-PC/raw/master/stream.aotwiki.com
+# sudo mv stream.aotwiki.com /etc/nginx/sites-available
+# sudo ln -s /etc/nginx/sites-available/stream.aotwiki.com /etc/nginx/sites-enabled
+# sudo systemctl reload nginx
