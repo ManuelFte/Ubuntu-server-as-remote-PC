@@ -2,32 +2,32 @@
 # Update server time
 sudo mv /etc/localtime /etc/localtime.old
 sudo ln -s /usr/share/zoneinfo/America/Mexico_City /etc/localtime
-# Mandatory stuff
+# Update system
 sudo apt update
 sudo apt upgrade -y
-# Installs LXDE, TightVNC Server, Chromium, and DWService
-sudo apt install lubuntu-desktop tightvncserver chromium-browser -y
+# Installs LXDE, Chromium, and DWService
+sudo apt install lubuntu-desktop chromium-browser -y
 wget https://www.dwservice.net/download/dwagent_x86.sh
 # Starts VNC server to set initial configuration
-vncserver
+# vncserver
 # Kills it in order to override settings
-vncserver -kill :1
+# vncserver -kill :1
 # Backup because why not
-mv ~/.vnc/xstartup ~/.vnc/xstartup.bak
+# mv ~/.vnc/xstartup ~/.vnc/xstartup.bak
 # Downloads new configuration file
-cd ~/.vnc
-wget https://bitbucket.org/ManuelFte/VPS-as-remote-PC/raw/master/xstartup
+# cd ~/.vnc
+# wget https://bitbucket.org/ManuelFte/VPS-as-remote-PC/raw/master/xstartup
 # Executable permissions
-chmod +x xstartup
+# chmod +x xstartup
 # Returns to user folder
-cd ~
+# cd ~
 # Launches again
-vncserver
+# vncserver
 # OpenDNS
 # dhclient=$( sudo find /etc -name dhclient.conf )
 # echo "supersede domain-name-servers 208.67.222.222,208.67.220.220; # OpenDNS nameservers" >> $dhclient
 # sudo systemctl restart networking
-wget https://bitbucket.org/ManuelFte/VPS-as-remote-PC/raw/master/resolv.conf
+# wget https://bitbucket.org/ManuelFte/VPS-as-remote-PC/raw/master/resolv.conf
 sudo mv /etc/resolv.conf /etc/resolv.conf.bak
 sudo mv resolv.conf /etc
 # sudo touch /etc/resolv.conf
