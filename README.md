@@ -4,7 +4,7 @@
 
 Turns a VPS into a basic remote PC. Installed software:
 
-* LXD
+* LXDE
 * Chromium
 * OpenDNS
 * DWService (downloads script, doesn't install)

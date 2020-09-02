@@ -5,8 +5,8 @@ sudo ln -s /usr/share/zoneinfo/America/Mexico_City /etc/localtime
 # Update system
 sudo apt update
 sudo apt upgrade -y
-# Installs LXDE, Chromium, and DWService
-sudo apt install lubuntu-desktop chromium-browser -y
+# Installs LXQt, Chromium, and DWService
+sudo apt install lxqt sddm chromium-browser -y
 wget https://www.dwservice.net/download/dwagent_x86.sh
 # Starts VNC server to set initial configuration
 # vncserver
