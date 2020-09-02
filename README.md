@@ -13,5 +13,6 @@ Turns a VPS into a basic remote PC. Installed software:
 
 ```
 git clone https://ManuelFte@bitbucket.org/ManuelFte/vps-as-remote-pc.git
-sh vps-as-remote-pc.git
+cd vps-as-remote-pc
+sh vps-as-remote-pc.sh
 ```
