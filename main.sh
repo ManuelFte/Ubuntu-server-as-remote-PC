@@ -1,10 +1,5 @@
 #!/bin/bash
 
-# Color codes
-GREEN='\033[0;32m'
-YELLOW='\033[0;33m'
-NC='\033[0m' # No Color
-
 # User variables
 timezone="America/Mexico_City"
 
@@ -15,6 +10,11 @@ scratch=false
 hyperbeam=false
 dns=false
 full=false
+
+# Color codes
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+NC='\033[0m' # No Color
 
 # Parsing command-line options
 while [[ "$#" -gt 0 ]]; do
@@ -33,7 +33,7 @@ echo -e "${GREEN}Starting script...${NC}"
 # Stop on errors
 set -e
 
-# Check if wget exists first, only if hyperbeam is enabled
+# Check if wget exists first, only if hyperbeam mode is enabled
 if [[ "$hyperbeam" == true ]]; then
     if ! command -v wget &> /dev/null; then
         echo -e "${YELLOW}wget not found! Adding it to the installation list....${NC}"
@@ -41,12 +41,12 @@ if [[ "$hyperbeam" == true ]]; then
     fi
 fi
 
-# Add resolvconf to missing packages if dns or full mode are enabled
+# Add resolvconf to missing packages, only if dns or full mode are enabled
 if [[ "$dns" == true || "$full" == true ]]; then
     missing_packages+="resolvconf "
 fi
 
-# Add appimagelauncher to missing packages if hyperbeam is enabled
+# Add appimagelauncher to missing packages, only if hyperbeam mode is enabled
 if [[ "$hyperbeam" == true ]]; then
     missing_packages+="appimagelauncher "
 fi
@@ -86,7 +86,7 @@ fi
 
 # Install software packages
 echo -e "${GREEN}Installing software packages...${NC}"
-# Add AppImage Launcher repository only if hyperbeam is enabled
+# Add AppImage Launcher repository, only if hyperbeam mode is enabled
 if [[ "$hyperbeam" == true ]]; then
     sudo add-apt-repository ppa:appimagelauncher-team/stable -y
     sudo apt update
@@ -94,7 +94,7 @@ fi
 
 sudo apt install lxqt openbox sddm tigervnc-standalone-server chromium-browser "$missing_packages" -y
 
-# Download Hyperbeam, only if hyperbeam is enabled
+# Download Hyperbeam, only if hyperbeam mode is enabled
 if [[ "$hyperbeam" == true ]]; then
     echo -e "${GREEN}Downloading Hyperbeam...${NC}"
     wget https://cdn.hyperbeam.com/Hyperbeam-0.21.0.AppImage
@@ -124,7 +124,7 @@ chmod +x "$HOME/.vnc/xstartup"
 echo -e "${GREEN}Launching VNC server again...${NC}"
 vncserver :1 -geometry 1920x1080 -depth 24 -dpi 96
 
-# Set OpenDNS's nameservers in resolved.conf, only if dns or full mode is enabled
+# Set OpenDNS's nameservers in resolved.conf, only if dns or full mode are enabled
 if [[ "$dns" == true || "$full" == true ]]; then
     echo -e "${GREEN}Setting OpenDNS's nameservers in resolved.conf...${NC}"
     if [ -f "/etc/systemd/resolved.conf" ]; then
