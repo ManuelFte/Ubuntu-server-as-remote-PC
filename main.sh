@@ -5,49 +5,101 @@ GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
 NC='\033[0m' # No Color
 
-echo -e "${GREEN}Starting script...${NC}"
-
-# Variables
+# User variables
 timezone="America/Mexico_City"
+
+# Other variables
+missing_packages=""
 script_dir="$(pwd)"
+scratch=false
+hyperbeam=false
+dns=false
+full=false
+
+# Parsing command-line options
+while [[ "$#" -gt 0 ]]; do
+    case $1 in
+        --scratch|-sc) scratch=true ;;
+        --dns|-dn) dns=true ;;
+        --hyperbeam|-hb) hyperbeam=true ;;
+        --full|-fl) full=true ;;
+        *) echo "Unknown parameter passed: $1"; exit 1 ;;
+    esac
+    shift
+done
+
+echo -e "${GREEN}Starting script...${NC}"
 
 # Stop on errors
 set -e
 
-# Adjust the clock
-echo -e "${GREEN}Adjusting the clock...${NC}"
-if [ -f "/etc/localtime" ]; then
-    sudo mv /etc/localtime /etc/localtime.old
+# Check if wget exists first, only if hyperbeam is enabled
+if [[ "$hyperbeam" == true ]]; then
+    if ! command -v wget &> /dev/null; then
+        echo -e "${YELLOW}wget not found! Adding it to the installation list....${NC}"
+        missing_packages+="wget "
+    fi
 fi
 
-sudo ln -s /usr/share/zoneinfo/"$timezone" /etc/localtime
+# Add resolvconf to missing packages if dns or full mode are enabled
+if [[ "$dns" == true || "$full" == true ]]; then
+    missing_packages+="resolvconf "
+fi
+
+# Add appimagelauncher to missing packages if hyperbeam is enabled
+if [[ "$hyperbeam" == true ]]; then
+    missing_packages+="appimagelauncher "
+fi
+
+# Adjust the clock, only if scratch or full mode are enabled
+if [[ "$scratch" == true || "$full" == true ]]; then
+    echo -e "${GREEN}Adjusting the clock...${NC}"
+    if [ -f "/etc/localtime" ]; then
+        sudo mv /etc/localtime /etc/localtime.old
+    fi
+    sudo ln -s /usr/share/zoneinfo/"$timezone" /etc/localtime
+fi
 
 # Upgrade the system
 echo -e "${GREEN}Upgrading the system...${NC}"
 sudo apt update && sudo apt upgrade -y
 
-# Set a password for the current user
-echo -e "${GREEN}Setting a password for the current user...${NC}"
-sudo passwd "$USER"
+# Set a password for the current user, only if scratch or full mode are enabled
+if [[ "$scratch" == true || "$full" == true ]]; then
+    echo -e "${GREEN}Setting a password for the current user...${NC}"
+    sudo passwd "$USER"
+fi
 
-# Backup and update SSH configuration
-echo -e "${GREEN}Backing up and updating SSH configuration...${NC}"
-sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
-sudo sed -i 's/#\?PasswordAuthentication .*/PasswordAuthentication yes/' /etc/ssh/sshd_config
+# Backup and update SSH configuration, only if scratch or full mode are enabled
+if [[ "$scratch" == true || "$full" == true ]]; then
+    echo -e "${GREEN}Backing up and updating SSH configuration...${NC}"
+    sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
+    sudo sed -i 's/#\?PasswordAuthentication .*/PasswordAuthentication yes/' /etc/ssh/sshd_config
+fi
 
-# Restart SSH services
-echo -e "${GREEN}Restarting SSH services...${NC}"
-sleep 1
-sudo systemctl restart ssh sshd
+# Restart SSH services, only if scratch or full mode are enabled
+if [[ "$scratch" == true || "$full" == true ]]; then
+    echo -e "${GREEN}Restarting SSH services...${NC}"
+    sleep 1
+    sudo systemctl restart ssh sshd
+fi
 
 # Install software packages
 echo -e "${GREEN}Installing software packages...${NC}"
-sudo apt install lxqt openbox sddm tigervnc-standalone-server chromium-browser resolvconf -y
+# Add AppImage Launcher repository only if hyperbeam is enabled
+if [[ "$hyperbeam" == true ]]; then
+    sudo add-apt-repository ppa:appimagelauncher-team/stable -y
+    sudo apt update
+fi
 
-# Download Hyperbeam
-echo -e "${GREEN}Downloading Hyperbeam...${NC}"
-wget https://cdn.hyperbeam.com/Hyperbeam-0.21.0.AppImage
-chmod u+x Hyperbeam-0.21.0.AppImage
+sudo apt install lxqt openbox sddm tigervnc-standalone-server chromium-browser "$missing_packages" -y
+
+# Download Hyperbeam, only if hyperbeam is enabled
+if [[ "$hyperbeam" == true ]]; then
+    echo -e "${GREEN}Downloading Hyperbeam...${NC}"
+    wget https://cdn.hyperbeam.com/Hyperbeam-0.21.0.AppImage
+    chmod u+x Hyperbeam-0.21.0.AppImage
+fi
 
 # Start VNC server to set initial configuration
 echo -e "${GREEN}Starting VNC server for initial configuration...${NC}"
@@ -72,19 +124,19 @@ chmod +x "$HOME/.vnc/xstartup"
 echo -e "${GREEN}Launching VNC server again...${NC}"
 vncserver :1 -geometry 1920x1080 -depth 24 -dpi 96
 
-# Backup resolved.conf
-if [ -f "/etc/systemd/resolved.conf" ]; then
-    echo -e "${GREEN}resolved.conf found. Backing it up...${NC}"
-    sudo cp /etc/systemd/resolved.conf /etc/systemd/resolved.conf.backup
+# Set OpenDNS's nameservers in resolved.conf, only if dns or full mode is enabled
+if [[ "$dns" == true || "$full" == true ]]; then
+    echo -e "${GREEN}Setting OpenDNS's nameservers in resolved.conf...${NC}"
+    if [ -f "/etc/systemd/resolved.conf" ]; then
+        echo -e "${GREEN}resolved.conf found. Backing it up...${NC}"
+        sudo cp /etc/systemd/resolved.conf /etc/systemd/resolved.conf.backup
+    fi
+    sudo cp "${script_dir}/resolved.conf" /etc/systemd/
+
+    # Restart DNS
+    echo -e "${GREEN}Restarting DNS...${NC}"
+    sleep 1
+    sudo systemctl restart systemd-resolved
 fi
-
-# Set OpenDNS's nameservers in resolved.conf
-echo -e "${GREEN}Setting OpenDNS's nameservers in resolved.conf...${NC}"
-sudo cp "${script_dir}/resolved.conf" /etc/systemd/
-
-# Restart DNS
-echo -e "${GREEN}Restarting DNS...${NC}"
-sleep 1
-sudo systemctl restart systemd-resolved
 
 echo -e "${GREEN}Script completed.${NC}"
