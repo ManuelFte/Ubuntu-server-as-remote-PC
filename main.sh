@@ -6,7 +6,7 @@ timezone="America/Mexico_City"
 # Other variables
 missing_packages=""
 script_dir="$(pwd)"
-basic=false
+initial_setup=false
 dns=false
 hyperbeam=false
 full=false
@@ -19,7 +19,7 @@ NC='\033[0m' # No Color
 # Parsing command-line options
 while [[ "$#" -gt 0 ]]; do
     case $1 in
-        --basic|-bc) basic=true ;;
+        --include-initial-setup|-iis) initial_setup=true ;;
         --dns|-dn) dns=true ;;
         --hyperbeam|-hb) hyperbeam=true ;;
         --full|-fl) full=true ;;
@@ -51,8 +51,8 @@ if [[ "$hyperbeam" == true ]]; then
     missing_packages+="appimagelauncher "
 fi
 
-# Adjust the clock, only if basic or full mode are enabled
-if [[ "$basic" == true || "$full" == true ]]; then
+# Adjust the clock, only if initial_setup or full mode are enabled
+if [[ "$initial_setup" == true || "$full" == true ]]; then
     echo -e "${GREEN}Adjusting the clock...${NC}"
     if [ -f "/etc/localtime" ]; then
         sudo mv /etc/localtime /etc/localtime.old
@@ -64,21 +64,21 @@ fi
 echo -e "${GREEN}Upgrading the system...${NC}"
 sudo apt update && sudo apt upgrade -y
 
-# Set a password for the current user, only if basic or full mode are enabled
-if [[ "$basic" == true || "$full" == true ]]; then
+# Set a password for the current user, only if initial_setup or full mode are enabled
+if [[ "$initial_setup" == true || "$full" == true ]]; then
     echo -e "${GREEN}Setting a password for the current user...${NC}"
     sudo passwd "$USER"
 fi
 
-# Backup and update SSH configuration, only if basic or full mode are enabled
-if [[ "$basic" == true || "$full" == true ]]; then
+# Backup and update SSH configuration, only if initial_setup or full mode are enabled
+if [[ "$initial_setup" == true || "$full" == true ]]; then
     echo -e "${GREEN}Backing up and updating SSH configuration...${NC}"
     sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
     sudo sed -i 's/#\?PasswordAuthentication .*/PasswordAuthentication yes/' /etc/ssh/sshd_config
 fi
 
-# Restart SSH services, only if basic or full mode are enabled
-if [[ "$basic" == true || "$full" == true ]]; then
+# Restart SSH services, only if initial_setup or full mode are enabled
+if [[ "$initial_setup" == true || "$full" == true ]]; then
     echo -e "${GREEN}Restarting SSH services...${NC}"
     sleep 1
     sudo systemctl restart ssh sshd

@@ -2,7 +2,7 @@
 
 ## Description
 
-Bash script to turn an Ubuntu 20.04 server into a lightweight remote PC, with LXQt as desktop environment, and VNC access via an SSH tunnel.
+Bash script to turn an Ubuntu 20.04 server into a basic and lightweight remote PC, with LXQt as desktop environment, and VNC access via an SSH tunnel.
 
 ![LXQt on Ubuntu 20.04](https://github.com/ManuelFte/Ubuntu-server-as-remote-PC/assets/68722732/d637c034-f532-4ad5-bb14-8c09b199fc68)
 
@@ -20,7 +20,7 @@ Bash script to turn an Ubuntu 20.04 server into a lightweight remote PC, with LX
 
 ## Optional modes
 
-- `--basic / -bc` - Gives the server some basic unrelated setup in case it was just created; namely, it adjusts the clock and sets up a password for the current user (ignore if you did this already on your own).
+- `--include-initial-setup / -iis` - Includes some initial server setup in case the server was just created; namely, it adjusts the clock and sets up a password for the current user. Useful for Google Cloud VMs. Ignore if you did this already on your own.
 - `--dns / -dn` - Sets up OpenDNS nameservers (more options available in [`resolved.conf`](https://github.com/ManuelFte/Ubuntu-server-as-remote-PC/blob/main/resolved.conf)).
 - `--full / -fl` - Does all of the above.
 
