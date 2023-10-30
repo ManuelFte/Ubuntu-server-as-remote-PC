@@ -60,4 +60,4 @@ b) If you're using login via password:
 ssh -L 7000:localhost:5900 -N -v <user>@<IP>
 ```
 
-Then, also from the **client** machine, use a VNC program like TigerVNC to connect to `localhost:7001` (on Linux you can use `vncviewer localhost:7001`).
+Then, also from the **client** machine, use a VNC program like TigerVNC to connect to `localhost:7000` (on Linux you can use `vncviewer localhost:7000`).
