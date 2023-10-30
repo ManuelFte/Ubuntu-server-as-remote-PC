@@ -2,7 +2,7 @@
 
 ## Description
 
-Turns an Ubuntu 20.04 server into a basic remote PC, with LXQt and access via VNC.
+Bash script to turn an Ubuntu 20.04 server into a basic remote PC, with LXQt and access via VNC.
 
 ![LXQt on Ubuntu 20.04](https://github.com/ManuelFte/Ubuntu-server-as-remote-PC/assets/68722732/d637c034-f532-4ad5-bb14-8c09b199fc68)
 
