@@ -20,7 +20,7 @@ Bash script to turn an Ubuntu 20.04 server into a basic remote PC, with LXQt and
 
 ## Optional modes
 
-- `--scratch / -sc` - When the script is run on a new server. Adjusts the clock and sets up a password for the current user.
+- `--basic / -bc` - Gives the server some basic unrelated setup in case it was just created; namely, it adjusts the clock and sets up a password for the current user (ignore if you did this already on your own).
 - `--dns / -dn` - Sets up OpenDNS nameservers (more options available in `resolved.conf`).
 - `--full / -fl` - Does all of the above.
 
