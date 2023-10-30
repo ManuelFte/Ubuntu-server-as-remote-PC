@@ -2,7 +2,7 @@
 
 ## Description
 
-Turns an Ubuntu server into a basic remote PC.
+Turns an Ubuntu 20.04 server into a basic remote PC, with LXQt and access via VNC.
 
 ![image](https://github.com/ManuelFte/VPS-as-remote-PC/assets/68722732/9ce618da-1ba4-4cc7-9676-9c9da785cd10)
 
