@@ -15,12 +15,12 @@ Turns an Ubuntu 20.04 server into a basic remote PC, with LXQt and access via VN
 ## Requirements
 
 - Ubuntu 20.04
-- At least 4 GB RAM
-- At least 20 GB storage
+- At least 4 GB of RAM
+- At least 20 GB of storage
 
 ## Optional modes
 
-- `--scratch / -sc` - When the script is being run on a new server. Adjusts the clock and sets up a password for the current user.
+- `--scratch / -sc` - When the script is run on a new server. Adjusts the clock and sets up a password for the current user.
 - `--dns / -dn` - Sets up OpenDNS nameservers (more options available in `resolved.conf`).
 - `--full / -fl` - Does all of the above.
 
