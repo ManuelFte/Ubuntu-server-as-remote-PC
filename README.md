@@ -1,8 +1,8 @@
-# VPS as remote PC
+# Ubuntu server as remote PC
 
 ## Description
 
-Turns a VPS into a basic remote PC.
+Turns an Ubuntu server into a basic remote PC.
 
 ![image](https://github.com/ManuelFte/VPS-as-remote-PC/assets/68722732/9ce618da-1ba4-4cc7-9676-9c9da785cd10)
 
@@ -11,6 +11,12 @@ Turns a VPS into a basic remote PC.
 * LXQt (with Openbox)
 * TigerVNC Standalone Server
 * Chromium
+
+## Requirements
+
+- Ubuntu 20.04
+- At least 4 GB RAM
+- At least 20 GB storage
 
 ## Optional modes
 
@@ -24,13 +30,13 @@ Turns a VPS into a basic remote PC.
 Clone the repository:
 
 ```
-git clone https://github.com/ManuelFte/VPS-as-remote-PC
+git clone https://github.com/ManuelFte/Ubuntu-server-as-remote-PC
 ```
 
 Enter the script's directory:
 
 ```
-cd VPS-as-remote-PC
+cd Ubuntu-server-as-remote-PC
 ```
 
 [Optional] Open `main.sh` and set the correct timezone in the user variables:
