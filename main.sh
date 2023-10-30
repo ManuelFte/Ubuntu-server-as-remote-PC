@@ -7,8 +7,8 @@ timezone="America/Mexico_City"
 missing_packages=""
 script_dir="$(pwd)"
 scratch=false
-hyperbeam=false
 dns=false
+hyperbeam=false
 full=false
 
 # Color codes
