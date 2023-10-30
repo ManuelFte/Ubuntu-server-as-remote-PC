@@ -33,7 +33,7 @@ Enter the script's directory:
 cd VPS-as-remote-PC
 ```
 
-Open `main.sh` and set the correct timezone in the user variables:
+[Optional] Open `main.sh` and set the correct timezone in the user variables:
 
 ```
 nano main.sh
