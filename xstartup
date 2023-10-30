@@ -1,3 +1,15 @@
 #!/bin/bash
-xrdb $HOME/.Xresources
-startlxqt & 
+export LIBGL_ALWAYS_SOFTWARE=1
+export XKL_XMODMAP_DISABLE=1
+unset SESSION_MANAGER
+unset DBUS_SESSION_BUS_ADDRESS
+
+# Load xinitrc configurations
+# /etc/X11/xinit/xinitrc
+/etc/X11/Xsession
+
+# Start the LXQt desktop environment
+startlxqt &
+
+# Load user's X resources if they exist
+[ -r $HOME/.Xresources ] && xrdb $HOME/.Xresources

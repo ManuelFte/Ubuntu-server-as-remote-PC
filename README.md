@@ -4,23 +4,30 @@
 
 Turns a VPS into a basic remote PC. Installed software:
 
-* LXQt
-* TightVNC Server
+* LXQt (with Openbox)
+* TigerVNC Standalone Server
 * Chromium
-* OpenDNS
 
 ## Usage
 
-```
-git clone https://ManuelFte@bitbucket.org/ManuelFte/vps-as-remote-pc.git
-cd vps-as-remote-pc
-sh vps-as-remote-pc.sh
-```
+Clone the repository:
 
-To connect, type this in the client machine:
+`git clone https://github.com/ManuelFte/VPS-as-remote-PC`
 
-`ssh -L 59000:127.0.0.1:5901 user@IP -N -v -v`
+Enter the script's directory:
 
-Then use a VNC program like TigerVNC to connect to `127.0.0.1:59000`.
+`cd vps-as-remote-pc`
 
-<!--https://serverfault.com/questions/489192/ssh-tunnel-refusing-connections-with-channel-2-open-failed-->
+Open `main.sh` and set the correct timezone in the variables:
+
+`nano main.sh`
+
+Run the script:
+
+`bash main.sh`
+
+After the script has finished, type this in the **client** machine:
+
+`ssh -t -L 7001:localhost:5901 -N -v <user>@<IP>`
+
+Then, also from the **client** machine, use a VNC program like TigerVNC to connect to `localhost:7001` (on Linux you can use `vncviewer localhost:7001`).
