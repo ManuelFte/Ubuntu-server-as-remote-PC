@@ -4,7 +4,7 @@
 timezone="America/Mexico_City"
 
 # Other variables
-missing_packages=""
+missing_packages=()
 script_dir="$(pwd)"
 initial_setup=false
 dns=false
@@ -37,18 +37,18 @@ set -e
 if [[ "$hyperbeam" == true ]]; then
     if ! command -v wget &> /dev/null; then
         echo -e "${YELLOW}wget not found! Adding it to the installation list....${NC}"
-        missing_packages+="wget "
+        missing_packages+=("wget")
     fi
 fi
 
 # Add resolvconf to missing packages, only if dns or full mode are enabled
 if [[ "$dns" == true || "$full" == true ]]; then
-    missing_packages+="resolvconf "
+    missing_packages+=("resolvconf")
 fi
 
 # Add appimagelauncher to missing packages, only if hyperbeam mode is enabled
 if [[ "$hyperbeam" == true ]]; then
-    missing_packages+="appimagelauncher "
+    missing_packages+=("appimagelauncher")
 fi
 
 # Adjust the clock, only if initial_setup or full mode are enabled
@@ -92,7 +92,7 @@ if [[ "$hyperbeam" == true ]]; then
     sudo apt update
 fi
 
-sudo apt install lxqt openbox sddm tigervnc-standalone-server chromium-browser "$missing_packages" -y
+sudo apt install lxqt openbox sddm tigervnc-standalone-server chromium-browser "${missing_packages[@]}" -y
 
 # Download Hyperbeam, only if hyperbeam mode is enabled
 if [[ "$hyperbeam" == true ]]; then
