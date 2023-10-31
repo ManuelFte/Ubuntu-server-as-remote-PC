@@ -56,14 +56,14 @@ After the script has finished, type one of these commands in the **client** mach
 a) If you're using login via SSH key:
 
 ```
-ssh -i ~/.ssh/id_rsa -L 7000:localhost:5900 -N -v <user>@<IP>
+ssh -i ~/.ssh/id_rsa -L 7000:localhost:5901 -N -v <user>@<IP>
 
 ```
 
 b) If you're using login via password:
 
 ```
-ssh -L 7000:localhost:5900 -N -v <user>@<IP>
+ssh -L 7000:localhost:5901 -N -v <user>@<IP>
 ```
 
 Then, also from the **client** machine, use a VNC program like TigerVNC to connect to `localhost:7000` (on Linux you can use `vncviewer localhost:7000`).
